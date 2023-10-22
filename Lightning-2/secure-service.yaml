@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-10-22T11:18:02Z"
+  labels:
+    run: secure-pod
+  name: secure-service
+  namespace: default
+  resourceVersion: "5204"
+  uid: 65062a25-96f4-4c03-84ce-45945b870dea
+spec:
+  clusterIP: 10.108.184.98
+  clusterIPs:
+  - 10.108.184.98
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: secure-pod
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

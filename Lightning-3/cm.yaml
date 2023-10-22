@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  TIME_FREQ: "10"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-10-22T11:40:34Z"
+  name: time-config
+  namespace: dvl1987
+  resourceVersion: "6977"
+  uid: 2fac0b3d-0dc1-4ee9-95ba-b4bf89a097d7

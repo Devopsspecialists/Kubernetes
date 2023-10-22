@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: "2023-10-22T11:18:03Z"
+  generation: 1
+  name: network-policy
+  namespace: default
+  resourceVersion: "5208"
+  uid: db270b62-0ade-4679-ac68-d2892830f23b
+spec:
+  podSelector: 
+    matchLabels:
+      run: secure-pod
+  policyTypes:
+  - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              name: webapp-color
+      ports:
+        - protocol: TCP
+          port: 80
+status: {}
