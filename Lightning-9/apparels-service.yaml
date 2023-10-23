@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-10-23T08:39:45Z"
+  name: apparels-service
+  namespace: default
+  resourceVersion: "8000"
+  uid: 8ee79684-799d-4c11-88a4-a59772eeb083
+spec:
+  clusterIP: 10.96.31.115
+  clusterIPs:
+  - 10.96.31.115
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp-apparels
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

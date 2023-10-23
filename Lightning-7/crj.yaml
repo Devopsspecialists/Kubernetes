@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"creationTimestamp":null,"name":"dice","namespace":"default"},"spec":{"jobTemplate":{"metadata":{"creationTimestamp":null,"name":"dice"},"spec":{"activeDeadlineSeconds":20,"backoffLimit":25,"completions":1,"template":{"metadata":{"creationTimestamp":null},"spec":{"containers":[{"image":"kodekloud/throw-dice","name":"dice","resources":{}}],"restartPolicy":"OnFailure"}}}},"schedule":"*/1 * * * *"},"status":{}}
+  creationTimestamp: "2023-10-23T08:21:00Z"
+  generation: 1
+  name: dice
+  namespace: default
+  resourceVersion: "5634"
+  uid: 23731584-e42a-4a49-917d-c7c9c5dd1f7d
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: dice
+    spec:
+      activeDeadlineSeconds: 20
+      backoffLimit: 25
+      completions: 1
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: kodekloud/throw-dice
+            imagePullPolicy: Always
+            name: dice
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/1 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+status: {}

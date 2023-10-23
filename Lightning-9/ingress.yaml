@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: "2023-10-23T08:43:11Z"
+  generation: 1
+  name: ingress-vh-routing
+  namespace: default
+  resourceVersion: "8475"
+  uid: 6956f2df-d63a-4a7e-b36a-07487e879dd9
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: watch.ecom-store.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: video-service
+            port:
+              number: 8080
+        path: /video
+        pathType: Exact
+  - host: apparels.ecom-store.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: apparels-service
+            port:
+              number: 8080
+        path: /wear
+        pathType: Exact
+status:
+  loadBalancer: {}
