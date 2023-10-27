@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-10-27T11:57:41Z"
+  labels:
+    app: redis
+  name: redis
+  namespace: default
+  resourceVersion: "8122"
+  uid: c62071c7-0f08-4894-abff-ee9e54ebbfd9
+spec:
+  clusterIP: 10.96.132.18
+  clusterIPs:
+  - 10.96.132.18
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: redis
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  creationTimestamp: "2023-10-27T12:41:09Z"
+  generation: 1
+  name: my-video-service
+  namespace: default
+  resourceVersion: "4889"
+  uid: 06d8ceb5-dcf5-467c-ba34-5dbb4e88c19c
+spec:
+  rules:
+  - host: ckad-mock-exam-solution.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: my-video-service
+            port:
+              number: 8080
+        path: /video
+        pathType: Exact
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.108.57.79

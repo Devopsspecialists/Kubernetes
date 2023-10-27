@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    batch.kubernetes.io/job-tracking: ""
+  creationTimestamp: "2023-10-27T12:57:43Z"
+  generation: 1
+  labels:
+    batch.kubernetes.io/controller-uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+    batch.kubernetes.io/job-name: whalesay
+    controller-uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+    job-name: whalesay
+  name: whalesay
+  namespace: default
+  resourceVersion: "6478"
+  uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+spec:
+  backoffLimit: 6
+  completionMode: NonIndexed
+  completions: 10
+  parallelism: 1
+  selector:
+    matchLabels:
+      batch.kubernetes.io/controller-uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+  suspend: false
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        batch.kubernetes.io/controller-uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+        batch.kubernetes.io/job-name: whalesay
+        controller-uid: 12642068-f0e0-418c-91fd-7fb404a3e043
+        job-name: whalesay
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - cowsay I am going to ace CKAD!
+        image: docker/whalesay
+        imagePullPolicy: Always
+        name: whalesay
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  active: 1
+  ready: 0
+  startTime: "2023-10-27T12:57:43Z"
+  uncountedTerminatedPods: {}

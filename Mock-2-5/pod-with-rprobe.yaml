@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-10-27T12:44:03Z"
+  labels:
+    name: pod-with-rprobe
+  name: pod-with-rprobe
+  namespace: default
+  resourceVersion: "5152"
+  uid: e6ef5fbb-0cde-4c82-bf85-a661224472dd
+spec:
+  containers:
+  - env:
+    - name: APP_START_DELAY
+      value: "180"
+    image: kodekloud/webapp-delayed-start
+    imagePullPolicy: Always
+    name: pod-with-rprobe
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-mhn25
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: controlplane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-mhn25
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T12:44:03Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T12:44:08Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T12:44:08Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T12:44:03Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://a8b5fd5f1cc06591e425f0904b72a84ce651a8abf02fd443de16ef97954accca
+    image: docker.io/kodekloud/webapp-delayed-start:latest
+    imageID: docker.io/kodekloud/webapp-delayed-start@sha256:666b95c2ef8e00a74fa0ea96def8d9d69104ec5d9b9b0f49d8a76bd4c94ad343
+    lastState: {}
+    name: pod-with-rprobe
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-10-27T12:44:07Z"
+  hostIP: 192.21.186.9
+  phase: Running
+  podIP: 10.244.0.9
+  podIPs:
+  - ip: 10.244.0.9
+  qosClass: BestEffort
+  startTime: "2023-10-27T12:44:03Z"

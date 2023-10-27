@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-10-27T11:16:17Z"
+  name: messaging-service
+  namespace: marketing
+  resourceVersion: "4822"
+  uid: 192b6fff-6798-40e3-9247-f0c4eb80e07f
+spec:
+  clusterIP: 10.103.61.241
+  clusterIPs:
+  - 10.103.61.241
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    name: redis-pod
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

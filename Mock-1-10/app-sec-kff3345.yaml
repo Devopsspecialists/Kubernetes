@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-10-27T11:39:37Z"
+  name: app-sec-kff3345
+  namespace: default
+  resourceVersion: "6686"
+  uid: 2aabbba2-b373-42b6-a691-a2fc2fcec76f
+spec:
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: ubuntu
+    imagePullPolicy: Always
+    name: ubuntu
+    resources: {}
+    securityContext:
+      capabilities:
+        add:
+        - SYS_TIME
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xvkqv
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: controlplane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-xvkqv
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:39:37Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:39:39Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:39:39Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:39:37Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://26ba1ebdc5643d408c5d2681b8a9b8d22b80f000bbe276e543f70a110c1dbf28
+    image: docker.io/library/ubuntu:latest
+    imageID: docker.io/library/ubuntu@sha256:2b7412e6465c3c7fc5bb21d3e6f1917c167358449fecac8176c6e496e5c1f05f
+    lastState: {}
+    name: ubuntu
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-10-27T11:39:39Z"
+  hostIP: 192.16.249.9
+  phase: Running
+  podIP: 10.244.0.13
+  podIPs:
+  - ip: 10.244.0.13
+  qosClass: BestEffort
+  startTime: "2023-10-27T11:39:37Z"

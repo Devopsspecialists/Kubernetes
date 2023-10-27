@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-10-27T12:38:14Z"
+  name: my-video-service
+  namespace: default
+  resourceVersion: "4582"
+  uid: c843c14c-dbce-4fb3-a03d-df0c5470629a
+spec:
+  clusterIP: 10.107.211.123
+  clusterIPs:
+  - 10.107.211.123
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: webapp-video
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

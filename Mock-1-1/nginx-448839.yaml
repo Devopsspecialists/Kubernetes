@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-10-27T11:00:43Z"
+  labels:
+    run: nginx-448839
+  name: nginx-448839
+  namespace: default
+  resourceVersion: "3356"
+  uid: 8c80ee64-b65e-4361-bf7d-949da4292bc8
+spec:
+  containers:
+  - image: nginx:alpine
+    imagePullPolicy: IfNotPresent
+    name: nginx-448839
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4bs6x
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: controlplane
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-4bs6x
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:00:43Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:00:44Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:00:44Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-10-27T11:00:43Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://e3b6fc5c31f41467c1a1c697ddb7f97e2248cb68b2cd45f96be698c01a0c75c8
+    image: docker.io/library/nginx:alpine
+    imageID: docker.io/library/nginx@sha256:dd2a9179765849767b10e2adde7e10c4ad6b7e4d4846e6b77ec93f080cd2db27
+    lastState: {}
+    name: nginx-448839
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-10-27T11:00:44Z"
+  hostIP: 192.16.249.9
+  phase: Running
+  podIP: 10.244.0.7
+  podIPs:
+  - ip: 10.244.0.7
+  qosClass: BestEffort
+  startTime: "2023-10-27T11:00:43Z"

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2023-10-27T11:06:02Z"
+  generation: 1
+  labels:
+    app: httpd-frontend
+  name: httpd-frontend
+  namespace: default
+  resourceVersion: "3773"
+  uid: 653a5635-0969-4c76-b208-72587833fbd6
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: httpd-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: httpd-frontend
+    spec:
+      containers:
+      - image: httpd:2.4-alpine
+        imagePullPolicy: IfNotPresent
+        name: httpd
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
